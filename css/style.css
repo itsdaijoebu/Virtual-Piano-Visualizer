@@ -1,0 +1,152 @@
+* ,
+*::before,
+*::after {
+     box-sizing: border-box;
+     font-size: 62.5%;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+     content: ".";
+     display: block;
+     clear: both;
+     visibility: hidden;
+     line-height: 0;
+     height: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 100vw;
+     flex-wrap: wrap;
+}
+
+ul {
+     display: flex;
+     justify-content: center;
+     margin: 0;
+     padding: 0;
+     position: relative;
+}
+
+li {
+     list-style: none;
+     display: flex;
+     justify-content: center;
+     align-items: flex-end;
+     padding-bottom: 2rem;
+     font-size: 2rem;
+     z-index: 1;
+     /* visibility: hidden; */
+}
+
+span {
+     font: inherit;
+}
+
+li.white {
+     color: black;
+}
+
+li.black {
+     color: white;
+}
+
+button {
+     margin: 0;
+     height: 5rem;
+     font-size: 1.5rem;
+     font-weight: bold;
+}
+
+.letter-toggle{
+     width: 10rem;    
+}
+
+.sustain {
+     width: 70vw;
+     margin: 2rem 15vw;
+}
+
+video {
+     position: absolute;
+     /* top: 0; */
+     /* left: 0; */
+     z-index: 0;
+}
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+.key, .visualizer-console *{
+     width: var(--width);
+}
+.key {
+     height: calc(var(--width)*4);
+     border-radius: 0 0 5px 5px;
+}
+.white{
+     max-height: 48vh;
+     background-color: white;
+     --width: 4vw;
+     border: 0.1rem solid black;
+     color: black;
+}
+.black{
+     max-height: calc(48vh*0.6);
+     background-color: black;
+     --width: 2.4vw;
+     margin: 0 calc(var(--width)/-2);
+     z-index: 2;
+     color: white;
+}
+.white.active {
+     background-color: #CCC;
+}
+.black.active {
+     background-color: #333;
+}
+
+.visualizer-console {
+     /* background-image: url("../video/stark-death.mp4/"); */
+     width: fit-content;
+     overflow: hidden;
+     background-color: black;
+     z-index: -2;
+}
+.visualizer {
+     background-color: rgba(0, 0, 0, 100);
+     width: calc((4vw*22)/37);
+     height: 50vh;
+}
+
+.visualizer.active {
+     background-color:rgba(0, 0, 0, 0)
+}
+
+.visualizer-options {
+     font-size: 2rem;
+     border: 2px solid black; 
+     margin: 0 1rem;
+     padding: 0.5rem;
+     background-color: rgb(224, 144, 144);
+}
+
+.hide {
+     visibility: hidden;
+}

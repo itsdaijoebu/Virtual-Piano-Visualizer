@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="Your description goes here">
+	<meta name="keywords" content="one, two, three">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Virtual Piano and Visualizer</title>
+
+	<!-- external CSS link -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+	<ul class="visualizer-console">
+		<video playsinline autoplay muted loop class="visualizer-video"><source src="/video/stark-death.mp4"></video>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		<li class="visualizer"></li>
+		
+		<li class="visualizer"></li>
+	</ul>
+
+	<ul class="keyboard">
+		<li data-note="c3" class="key white"><span></span></li>
+		<li data-note="db3" class="key black"><span></span></li>
+		<li data-note="d3" class="key white"><span></span></li>
+		<li data-note="eb3" class="key black"><span></span></li>
+		<li data-note="e3" class="key white"><span></span></li>
+		<li data-note="f3" class="key white"><span></span></li>
+		<li data-note="gb3" class="key black"><span></span></li>
+		<li data-note="g3" class="key white"><span></span></li>
+		<li data-note="ab3" class="key black"><span></span></li>
+		<li data-note="a3" class="key white"><span></span></li>
+		<li data-note="bb3" class="key black"><span></span></li>
+		<li data-note="b3" class="key white"><span></span></li>
+
+		<li data-note="c4" class="key white"><span></span></li>
+		<li data-note="db4" class="key black"><span></span></li>
+		<li data-note="d4" class="key white"><span></span></li>
+		<li data-note="eb4" class="key black"><span></span></li>
+		<li data-note="e4" class="key white"><span></span></li>
+		<li data-note="f4" class="key white"><span></span></li>
+		<li data-note="gb4" class="key black"><span></span></li>
+		<li data-note="g4" class="key white"><span></span></li>
+		<li data-note="ab4" class="key black"><span></span></li>
+		<li data-note="a4" class="key white"><span></span></li>
+		<li data-note="bb4" class="key black"><span></span></li>
+		<li data-note="b4" class="key white"><span></span></li>
+
+		<li data-note="c5" class="key white"><span></span></li>
+		<li data-note="db5" class="key black"><span></span></li>
+		<li data-note="d5" class="key white"><span></span></li>
+		<li data-note="eb5" class="key black"><span></span></li>
+		<li data-note="e5" class="key white"><span></span></li>
+		<li data-note="f5" class="key white"><span></span></li>
+		<li data-note="gb5" class="key black"><span></span></li>
+		<li data-note="g5" class="key white"><span></span></li>
+		<li data-note="ab5" class="key black"><span></span></li>
+		<li data-note="a5" class="key white"><span></span></li>
+		<li data-note="bb5" class="key black"><span></span></li>
+		<li data-note="b5" class="key white"><span></span></li>
+		
+		<li data-note="c6" class="key white"><span></span></li>
+
+	</ul>
+
+	<button type="button" class='sustain' id="sustain">Sustain Pedal</button>
+	<button type='button' class='letter-toggle' id='letter-toggle'>Toggle Letters</button>
+	<span class="visualizer-options" id="matched-vis">Matched</span>
+	<span class="visualizer-options" id="matched-random-vis">Matched-Rand</span>
+	<span class="visualizer-options" id="random-vis">Random</span>
+
+
+	<audio id="c3" src="sounds/default/C3.mp3"></audio>
+	<audio id="db3" src="sounds/default/Db3.mp3"></audio>
+	<audio id="d3" src="sounds/default/D3.mp3"></audio>
+	<audio id="eb3" src="sounds/default/Eb3.mp3"></audio>
+	<audio id="e3" src="sounds/default/E3.mp3"></audio>
+	<audio id="f3" src="sounds/default/F3.mp3"></audio>
+	<audio id="gb3" src="sounds/default/Gb3.mp3"></audio>
+	<audio id="g3" src="sounds/default/G3.mp3"></audio>
+	<audio id="ab3" src="sounds/default/Ab3.mp3"></audio>
+	<audio id="a3" src="sounds/default/A3.mp3"></audio>
+	<audio id="bb3" src="sounds/default/Bb3.mp3"></audio>
+	<audio id="b3" src="sounds/default/B3.mp3"></audio>
+
+	<audio id="c4" src="sounds/default/C4.mp3"></audio>
+	<audio id="db4" src="sounds/default/Db4.mp3"></audio>
+	<audio id="d4" src="sounds/default/D4.mp3"></audio>
+	<audio id="eb4" src="sounds/default/Eb4.mp3"></audio>
+	<audio id="e4" src="sounds/default/E4.mp3"></audio>
+	<audio id="f4" src="sounds/default/F4.mp3"></audio>
+	<audio id="gb4" src="sounds/default/Gb4.mp3"></audio>
+	<audio id="g4" src="sounds/default/G4.mp3"></audio>
+	<audio id="ab4" src="sounds/default/Ab4.mp3"></audio>
+	<audio id="a4" src="sounds/default/A4.mp3"></audio>
+	<audio id="bb4" src="sounds/default/Bb4.mp3"></audio>
+	<audio id="b4" src="sounds/default/B4.mp3"></audio>
+	
+	<audio id="c5" src="sounds/default/C5.mp3"></audio>
+	<audio id="db5" src="sounds/default/Db5.mp3"></audio>
+	<audio id="d5" src="sounds/default/D5.mp3"></audio>
+	<audio id="eb5" src="sounds/default/Eb5.mp3"></audio>
+	<audio id="e5" src="sounds/default/E5.mp3"></audio>
+	<audio id="f5" src="sounds/default/F5.mp3"></audio>
+	<audio id="gb5" src="sounds/default/Gb5.mp3"></audio>
+	<audio id="g5" src="sounds/default/G5.mp3"></audio>
+	<audio id="ab5" src="sounds/default/Ab5.mp3"></audio>
+	<audio id="a5" src="sounds/default/A5.mp3"></audio>
+	<audio id="bb5" src="sounds/default/Bb5.mp3"></audio>
+	<audio id="b5" src="sounds/default/B5.mp3"></audio>
+
+	<audio id="c6" src="sounds/default/C6.mp3"></audio>
+
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>
