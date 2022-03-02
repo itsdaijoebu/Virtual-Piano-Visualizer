@@ -1,3 +1,5 @@
+//ToDo: need to make visualizer panels fade when they expire, restart when they're chosen again, and NOT all disappear at once
+
 //The keyboard keys
 const KEYS = ['q', '2', 'w', '3', 'e', 'r', '5', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '[', '=', ']', 'a', 'z', 's', 'x', 'c', 'f', 'v', 'g', 'b', 'n', 'j', 'm', 'k', ',', 'l', '.', '/']
 
@@ -26,7 +28,6 @@ letterToggle.addEventListener('click', toggleKeyLetters)
 visMatched.addEventListener('click', () => visOptions = 'matched')
 visMatchedRand.addEventListener('click', () => visOptions = 'matchedRand')
 visRandom.addEventListener('click', () => visOptions = 'random')
-
 
 //variables and logic for the sustain pedal
 let sustain = false //whether or not the sustain pedal is being held down
