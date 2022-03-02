@@ -1,12 +1,15 @@
 //The keyboard keys
-const KEYS = ['q', '2', 'w', '3', 'e', 'r', '5', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '[', '=', ']', 'a', 'z', 's', 'x', 'c', 'f', 'v', 'g', 'b', 'n', 'j', 'm', 'k', ',', ';', '.', '/']
+const KEYS = ['q', '2', 'w', '3', 'e', 'r', '5', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '[', '=', ']', 'a', 'z', 's', 'x', 'c', 'f', 'v', 'g', 'b', 'n', 'j', 'm', 'k', ',', 'l', '.', '/']
 
 const MAX_KEYS = KEYS.length   //total number of keys
 
+//queryselectors on keys
 let keys = document.querySelectorAll('.key')
 let keysText = document.querySelectorAll('.key span')
 const whiteKeys = document.querySelectorAll('.key.white')
 const blackKeys = document.querySelectorAll('.key.black')
+
+//queryselectors on visualizers
 const visualizers = document.querySelectorAll('.visualizer')
 const visualizerOptions = document.querySelectorAll('.visualizerOptions')
 const visMatched = document.querySelector('#matched-vis')
@@ -33,8 +36,6 @@ let sustainKeyIndexes = []  //the keyIndexes of sustained keys
 const sustainButton = document.querySelector('#sustain')
 sustainButton.addEventListener('click', () => sustain ? releaseSustain() : (sustain = true))
 
-
-
 //label keys. Later, maybe add the ability to shift octaves
 labelKeys();
 
@@ -51,6 +52,7 @@ keys.forEach((key, index) => {
 document.addEventListener('keydown', pressKey)
 document.addEventListener('keyup', releaseKey)
 
+let pressedKeys = []
 function pressKey(e) {
     let key = e.key
 
@@ -58,36 +60,28 @@ function pressKey(e) {
         e.preventDefault()
     }
 
-    if (e.repeat) return
-    console.log('press key')
+    // if (e.repeat) return
+    if (pressedKeys.indexOf(key) > -1) return
 
     let keyIndex = KEYS.indexOf(key)
     // const whiteKeyIndex = WHITE_KEYS.indexOf(key)
     // const blackKeyIndex = BLACK_KEYS.indexOf(key)
 
-    if (keyIndex > -1) playNote(keys[keyIndex], keyIndex)
-    // if(whiteKeyIndex > -1) playNote(whiteKeys[whiteKeyIndex], whiteKeyIndex)
-    // if(blackKeyIndex > -1) playNote(blackKeys[blackKeyIndex], blackKeyIndex)
+    if (keyIndex > -1) {
+        playNote(keys[keyIndex], keyIndex)
+        // if(whiteKeyIndex > -1) playNote(whiteKeys[whiteKeyIndex], whiteKeyIndex)
+        // if(blackKeyIndex > -1) playNote(blackKeys[blackKeyIndex], blackKeyIndex)
+        pressedKeys.push(key)
+    }
 
     //sustain pedal
     if (key == ' ') {
         sustain = true
+        sustainButton.classList.add('active')
     }
 }
-
-function releaseSustain() {
-    sustain = false
-    for (let i = 0; i < sustainKeys.length; i++) {
-        stopNote(sustainKeys[i], sustainKeyIndexes[i])
-    }
-    //clears the array of keys being sustained
-    sustainKeys.length = 0;
-    sustainKeyIndexes.length = 0;
-}
-
 
 function releaseKey(e) {
-    console.log('release key')
     let key = e.key
 
     //releasing the sustain pedal releases all sustained notes
@@ -105,9 +99,12 @@ function releaseKey(e) {
     let keyIndex = KEYS.indexOf(key)
 
     if (keyIndex > -1) {
+        //remove key from pressedKeys to allow it to be played again
+
+
         //stores notes that are being sustained so they can be released along with the sustain pedal
         if (sustain) {
-            sustainPedal(keyIndex)
+            sustainActive(keyIndex)
             // sustainKeys.push(keys[keyIndex])
             // sustainKeyIndexes.push(keyIndex)
             // console.log(`sustainKeys: ${sustainKeys}`)
@@ -115,25 +112,22 @@ function releaseKey(e) {
         } else {
             stopNote(keys[keyIndex], keyIndex)
         }
+
+        let keyToRemoveIndex = pressedKeys.indexOf(key)
+        if (keyToRemoveIndex > -1) pressedKeys.splice(keyToRemoveIndex, 1)
     }
 }
 
 function releaseMouse(key, index) {
     if (sustain) {
-        sustainPedal(index)
-        console.log(`mouserelease key: ${key} mouserelease index: ${index}`)
+        sustainActive(index)
     } else {
         stopNote(key, index)
     }
 }
 
-function sustainPedal(keyIndex) {
-    sustainKeys.push(keys[keyIndex])
-    sustainKeyIndexes.push(keyIndex)
-    console.log(`sustainKeys: ${sustainKeys}`)
-    console.log(`sustainKeyIndexes: ${sustainKeyIndexes}`)
-}
 
+//Logic to play and stop notes
 function playNote(key, index) {
     let noteAudio = document.getElementById(key.dataset.note)
     noteAudio.currentTime = 0
@@ -145,13 +139,11 @@ function playNote(key, index) {
     noteAudio.addEventListener('ended', () => {
         key.classList.remove('active')
         visualizerDeactivate()
-
     })
 }
 
 function stopNote(key, index) {
     let noteAudio = document.getElementById(key.dataset.note)
-    // console.log("stop note logged")
 
     let noteTimer = setInterval(
         function () {
@@ -163,7 +155,6 @@ function stopNote(key, index) {
             //when called, causes the note to rapidly fade and stop all visualizations
             if (noteAudio.volume > minVol) {
                 noteAudio.volume -= fadeSpeed
-                // console.log("note volume: " + noteAudio.volume)
             } else {
                 // console.log('end volume: ' + noteAudio.volume)
                 // noteAudio.volume = 0
@@ -176,9 +167,36 @@ function stopNote(key, index) {
         }, 1)
 }
 
-//decides how the visualizer works 
+// logic for the sustain pedal
+function sustainActive(keyIndex) {
+    sustainKeys.push(keys[keyIndex])
+    sustainKeyIndexes.push(keyIndex)
+}
+
+function releaseSustain() {
+    sustain = false
+    for (let i = 0; i < sustainKeys.length; i++) {
+        stopNote(sustainKeys[i], sustainKeyIndexes[i])
+    }
+    //clears the array of keys being sustained
+    sustainKeys.length = 0;
+    sustainKeyIndexes.length = 0;
+    sustainButton.classList.remove('active')
+}
+
+//logic for how the visualizer works 
 let visActives = [];
 function visualizerActivate(index) {
+
+    let randomVisualizerPanels = function () {
+        let otherPanels = getRandomInt(10)
+        for (let i = 0; i < otherPanels; i++) {
+            let randomPanel = getRandomInt(MAX_KEYS - 1)
+            visualizers[randomPanel].classList.add('active')
+            visActives.push(randomPanel)
+        }
+    }
+
     if (visOptions == 'matched') {
         visualizers[index].classList.add('active')
         visActives.push(index)
@@ -189,27 +207,14 @@ function visualizerActivate(index) {
 
         let otherPanels = getRandomInt(10)
         for (let i = 0; i < otherPanels; i++) {
-            let randomPanel = getRandomInt(MAX_KEYS-1)
-            visualizers[randomPanel].classList.add('active')
-            visActives.push(randomPanel)
+            randomVisualizerPanels()
         }
     }
     else if (visOptions == 'random') {
-        let otherPanels = getRandomInt(10)
-        for (let i = 0; i < otherPanels; i++) {
-            let randomPanel = getRandomInt(MAX_KEYS-1)
-            visualizers[randomPanel].classList.add('active')
-            visActives.push(randomPanel)
-            console.log(`random panel: ${randomPanel}`)
-        }
+        randomVisualizerPanels()
     } else {
         console.log(`visOptions didn't activate. Currently set to ${visOptions}`)
     }
-
-}
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max + 1)
 }
 
 function visualizerDeactivate() {
@@ -217,6 +222,13 @@ function visualizerDeactivate() {
         visualizers[index].classList.remove('active'))
     visActives.length = 0
 }
+
+//Create a random int
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max + 1)
+}
+
+
 
 function labelKeys() {
     keysText.forEach((key, index) => {

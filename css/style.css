@@ -121,6 +121,9 @@ video {
 .black.active {
      background-color: #333;
 }
+.sustain.active {
+     background-color: rgb(168, 160, 160);
+}
 
 .visualizer-console {
      /* background-image: url("../video/stark-death.mp4/"); */
