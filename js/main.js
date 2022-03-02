@@ -1,9 +1,10 @@
-//ToDo: need to make visualizer panels fade when they expire, restart when they're chosen again, and NOT all disappear at once
+//ToDo: 
+//- make visualizer panels fade when they expire, restart when they're chosen again, and NOT all disappear at once
 
 //The keyboard keys
-const KEYS = ['q', '2', 'w', '3', 'e', 'r', '5', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '[', '=', ']', 'a', 'z', 's', 'x', 'c', 'f', 'v', 'g', 'b', 'n', 'j', 'm', 'k', ',', 'l', '.', '/']
+const KEYBOARD_KEYS = ['q', '2', 'w', '3', 'e', 'r', '5', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '[', '=', ']', 'a', 'z', 's', 'x', 'c', 'f', 'v', 'g', 'b', 'n', 'j', 'm', 'k', ',', 'l', '.', '/']
 
-const MAX_KEYS = KEYS.length   //total number of keys
+const MAX_KEYS = KEYBOARD_KEYS.length   //total number of keys linked to keyboard keys
 
 //queryselectors on keys
 let keys = document.querySelectorAll('.key')
@@ -55,38 +56,40 @@ document.addEventListener('keyup', releaseKey)
 
 let pressedKeys = []
 function pressKey(e) {
-    let key = e.key
+    let keyboardKey = e.key
 
-    if (key == ' ' && e.target == document.body) {
+    if (keyboardKey == ' ' && e.target == document.body) {
         e.preventDefault()
     }
 
     // if (e.repeat) return
-    if (pressedKeys.indexOf(key) > -1) return
-
-    let keyIndex = KEYS.indexOf(key)
+    let keyIndex = KEYBOARD_KEYS.indexOf(keyboardKey)    //finds the index of the keyboardKey 
     // const whiteKeyIndex = WHITE_KEYS.indexOf(key)
     // const blackKeyIndex = BLACK_KEYS.indexOf(key)
+
+    if (pressedKeys.indexOf(keys[keyIndex]) > -1) return
+
 
     if (keyIndex > -1) {
         playNote(keys[keyIndex], keyIndex)
         // if(whiteKeyIndex > -1) playNote(whiteKeys[whiteKeyIndex], whiteKeyIndex)
         // if(blackKeyIndex > -1) playNote(blackKeys[blackKeyIndex], blackKeyIndex)
-        pressedKeys.push(key)
+        pressedKeys.push(keys[keyIndex])
+        console.log(`keys[keyIndex], keyIndex: ${keys[keyIndex]}, ${keyIndex}`)
     }
 
     //sustain pedal
-    if (key == ' ') {
+    if (keyboardKey == ' ') {
         sustain = true
         sustainButton.classList.add('active')
     }
 }
 
 function releaseKey(e) {
-    let key = e.key
+    let keyboardKey = e.key //keyboard key linked to (presumably keyup) event
 
     //releasing the sustain pedal releases all sustained notes
-    if (key === ' ') {
+    if (keyboardKey === ' ') {
         releaseSustain()
         // sustain = false
         // for (let i = 0; i < sustainKeys.length; i++) {
@@ -97,11 +100,10 @@ function releaseKey(e) {
         // sustainKeyIndexes.length = 0;
     }
 
-    let keyIndex = KEYS.indexOf(key)
+    let keyIndex = KEYBOARD_KEYS.indexOf(keyboardKey)
 
     if (keyIndex > -1) {
-        //remove key from pressedKeys to allow it to be played again
-
+        
 
         //stores notes that are being sustained so they can be released along with the sustain pedal
         if (sustain) {
@@ -114,7 +116,8 @@ function releaseKey(e) {
             stopNote(keys[keyIndex], keyIndex)
         }
 
-        let keyToRemoveIndex = pressedKeys.indexOf(key)
+        //remove key from pressedKeys to allow it to be played again
+        let keyToRemoveIndex = pressedKeys.indexOf(keys[keyIndex])
         if (keyToRemoveIndex > -1) pressedKeys.splice(keyToRemoveIndex, 1)
     }
 }
@@ -148,6 +151,9 @@ function stopNote(key, index) {
 
     let noteTimer = setInterval(
         function () {
+            //clearInterval if key was pressed before note stopped fading, in order to prevent it from stopping the newly-pressed note from also fading
+            if(pressedKeys.indexOf(key) > -1) clearInterval(noteTimer)
+
             let minVol = 0.001
             let fadeSpeed = 0.05
             //prevents noteAudio.volume from going below zero
@@ -229,11 +235,9 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max + 1)
 }
 
-
-
 function labelKeys() {
     keysText.forEach((key, index) => {
-        key.textContent = KEYS[index]
+        key.textContent = KEYBOARD_KEYS[index]
     })
 }
 
