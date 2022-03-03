@@ -82,15 +82,6 @@ button {
      border-radius: 10px;
 }
 
-video {
-     position: absolute;
-     top: -25%;
-     /* left: 0; */
-     /* height: 100%; */
-     z-index: 0;
-     width: 100%;
-}
-
 /******************************************
 /* LAYOUT
 /*******************************************/
@@ -211,6 +202,19 @@ video {
 .video-options.active{
      background-color: rgb(78, 75, 75);
      color: white;
+}
+.visualizer-video {
+     position: absolute;
+     top: -25%;
+     height: 100%;
+     z-index: 0;
+     width: 100%;
+}
+.vid-container {
+     width: 100%;
+     height: 100%;
+     padding-bottom: 56.25%;
+     position: absolute;
 }
 
 .hide {

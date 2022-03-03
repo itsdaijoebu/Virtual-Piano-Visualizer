@@ -16,9 +16,13 @@
 
 <body>
 	<ul class="visualizer-console">
-		<video playsinline autoplay muted loop class="visualizer-video" id="visualizer-video">
-			<source src="/video/david-farouk-blue-eyes-fight.mp4">
-		</video>
+		<div class="vid-container">
+			<video playsinline autoplay muted loop class="visualizer-video" id="visualizer-video">
+				<source id="primary-video-src"
+					src="https://www.googleapis.com/drive/v3/files/1T4CXMXBXsrHm2FikVFz_BlATTN64A0iU?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media">
+				<source id="backup-video-src" src="video/legion-animation-fight.mp4">
+			</video>
+		</div>
 		<li class="visualizer" id="v1"></li>
 		<li class="visualizer" id="v2"></li>
 		<li class="visualizer" id="v3"></li>
@@ -114,8 +118,13 @@
 	</section>
 	<section>
 		<span class="video-options" id="legion">Legion</span>
-		<span class="video-options" id="avengers">Avengers</span>
 		<span class="video-options" id="yoi">Yuri on Ice!!</span>
+		<span class="video-options" id="houseki">Houseki No Kuni</span>
+		<span class="video-options" id="arcane">Arcane</span>
+		<span class="video-options" id="space">Space</span>
+		<span class="video-options" id="leon">Leon Vibing</span>
+
+
 	</section>
 
 	<audio id="c3" src="sounds/default/C3.mp3"></audio>

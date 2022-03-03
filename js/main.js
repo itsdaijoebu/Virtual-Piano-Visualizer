@@ -25,12 +25,37 @@ const visMatched = document.querySelector('#matched-vis')
 const visMatchedRand = document.querySelector('#matched-random-vis')
 const visRandom = document.querySelector('#random-vis')
 
-//Visualizer Video Query Selectors
+//Visualizer Video Query Selectors and video links
 const visVideo = document.querySelector('#visualizer-video')
+const visVideoSrc = document.querySelector('#primary-video-src')
+const visVideoSrcBackup = document.querySelector('#backup-video-src')
 const visVideoOptions = document.querySelectorAll('.video-options')
-const visVideoAvengers = document.querySelector('#avengers')
+
 const visVideoLegion = document.querySelector('#legion')
+const visVideoLegionSrc = `https://www.googleapis.com/drive/v3/files/1_XKunAVDspt7sKCqgU4zUAA1i8e7O01b?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
+const visVideoLegionSrcBackup = `video/legion-animation-fight.mp4`
+
 const visVideoYoI = document.querySelector('#yoi')
+// const visVideoYoISrc = `https://www.googleapis.com/drive/v3/files/107a2WKTEiHHxgYFe4NS4svb1S8A8i9va?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
+const visVideoYoISrcBackup = `video/yoi-eros.mp4`
+const visVideoYoISrc = `video/yoi-eros.mp4`
+
+const visVideoHouseki = document.querySelector('#houseki')
+const visVideoHousekiSrc = `https://www.googleapis.com/drive/v3/files/1hiTkqryXM1wxsrSJ6YtARQ5bbkW-j80l?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
+const visVideoHousekiSrcBackup = `video/houseki-no-kuni.mp4`
+
+const visVideoArcane = document.querySelector('#arcane')
+const visVideoArcaneSrc = `https://www.googleapis.com/drive/v3/files/1wt1L_tlv-bkR6NGsnvYzA7JPECKezfRr?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
+const visVideoArcaneSrcBackup = `video/arcane-jayce-ryze.mp4`
+
+const visVideoSpace = document.querySelector('#space')
+const visVideoSpaceSrc = `https://www.googleapis.com/drive/v3/files/1Fyn4IQ6P7E_rmkdZJJjSRu7qTPfaGEAw?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
+const visVideoSpaceSrcBackup = `video/space.mp4`
+
+const visVideoLeon = document.querySelector('#leon')
+const visVideoLeonSrc = `https://www.googleapis.com/drive/v3/files/1wwGfRSySuNxnNSV6ff9VaEvFCt0ElJBm?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
+const visVideoLeonSrcBackup = `video/leon-vibing.mp4`
+
 
 //sets the default visualizer option
 let visOptions = 'matched-random-vis'
@@ -49,9 +74,12 @@ visMatched.addEventListener('click', visualizerSelect)
 visMatchedRand.addEventListener('click', visualizerSelect)
 visRandom.addEventListener('click', visualizerSelect)
 
-visVideoAvengers.addEventListener('click', visVideoSelect)
 visVideoLegion.addEventListener('click', visVideoSelect)
 visVideoYoI.addEventListener('click', visVideoSelect)
+visVideoArcane.addEventListener('click', visVideoSelect)
+visVideoHouseki.addEventListener('click', visVideoSelect)
+visVideoSpace.addEventListener('click', visVideoSelect)
+visVideoLeon.addEventListener('click', visVideoSelect)
 
 //Sustain Variables: variables and logic for the sustain pedal
 let sustain = false //whether or not the sustain pedal is being held down
@@ -326,16 +354,47 @@ function visualizerSelect(visualizerType) {
 
 //Video: select the video that plays in the background of the piano
 function visVideoSelect(video) {
-    visVid = video.target.id
-    console.log(visVid)
+    visVidId = video.target.id
+    console.log(visVidId)
     visVideoOptions.forEach(e => e.classList.remove('active'))
     video.target.classList.add('active')
 
-    if(visVid == 'legion') {
-        visVideo.src = "../video/david-farouk-blue-eyes-fight.mp4"
-    } else if(visVid == 'avengers'){
-        visVideo.src = "../video/stark-death.mp4"
-    } else if(visVid == 'yoi'){
-        visVideo.src = "../video/yoi-eros.mp4"
+    if(visVidId == 'legion') {
+        visVideoSrc.src = visVideoLegionSrc
+        visVideoSrcBackup.src = visVideoLegionSrcBackup
+        visVideo.load()
+        visVideo.play()
+    } else if(visVidId == 'yoi'){
+        visVideoSrc.src = visVideoYoISrc
+        visVideoSrcBackup.src = visVideoYoISrcBackup
+        visVideo.load()
+        visVideo.play()
+        
+    } else if (visVidId == 'houseki') {
+        visVideoSrc.src = visVideoHousekiSrc
+        visVideoSrcBackup.src = visVideoHousekiSrcBackup
+        visVideo.load()
+        visVideo.play()
+        
+    } else if (visVidId == 'arcane') {
+        visVideoSrc.src = visVideoArcaneSrc
+        visVideoSrcBackup.src = visVideoArcaneSrcBackup
+        visVideo.load()
+        visVideo.play()
+        
+    } else if (visVidId == 'space') {
+        visVideoSrc.src = visVideoSpaceSrc
+        visVideoSrcBackup.src = visVideoSpaceSrcBackup
+        visVideo.load()
+        visVideo.play()
+        
+        
+    } else if (visVidId == 'leon') {
+        visVideoSrc.src = visVideoLeonSrc
+        visVideoSrcBackup.src = visVideoLeonSrcBackup
+        visVideo.load()
+        visVideo.play()
+        
+        
     }
 }
