@@ -18,9 +18,10 @@
 	<ul class="visualizer-console">
 		<div class="vid-container">
 			<video playsinline autoplay muted loop class="visualizer-video" id="visualizer-video">
-				<source id="primary-video-src"
+				<!-- <source id="external-video-src"
 					src="https://www.googleapis.com/drive/v3/files/1T4CXMXBXsrHm2FikVFz_BlATTN64A0iU?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media">
-				<source id="backup-video-src" src="video/legion-animation-fight.mp4">
+				-->
+				<source id="local-video-src" src="video/legion-animation-fight.mp4">
 			</video>
 		</div>
 		<li class="visualizer" id="v1"></li>
@@ -66,55 +67,55 @@
 	</ul>
 
 	<ul class="keyboard">
-		<li data-note="c3" class="key white"><span></span></li>
-		<li data-note="db3" class="key black"><span></span></li>
-		<li data-note="d3" class="key white"><span></span></li>
-		<li data-note="eb3" class="key black"><span></span></li>
-		<li data-note="e3" class="key white"><span></span></li>
-		<li data-note="f3" class="key white"><span></span></li>
-		<li data-note="gb3" class="key black"><span></span></li>
-		<li data-note="g3" class="key white"><span></span></li>
-		<li data-note="ab3" class="key black"><span></span></li>
-		<li data-note="a3" class="key white"><span></span></li>
-		<li data-note="bb3" class="key black"><span></span></li>
-		<li data-note="b3" class="key white"><span></span></li>
+		<li data-note="c3" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="db3" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="d3" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="eb3" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="e3" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="f3" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="gb3" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="g3" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="ab3" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="a3" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="bb3" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="b3" class="key white"><span class="toggleable-text"></span></li>
 
-		<li data-note="c4" class="key white"><span></span></li>
-		<li data-note="db4" class="key black"><span></span></li>
-		<li data-note="d4" class="key white"><span></span></li>
-		<li data-note="eb4" class="key black"><span></span></li>
-		<li data-note="e4" class="key white"><span></span></li>
-		<li data-note="f4" class="key white"><span></span></li>
-		<li data-note="gb4" class="key black"><span></span></li>
-		<li data-note="g4" class="key white"><span></span></li>
-		<li data-note="ab4" class="key black"><span></span></li>
-		<li data-note="a4" class="key white"><span></span></li>
-		<li data-note="bb4" class="key black"><span></span></li>
-		<li data-note="b4" class="key white"><span></span></li>
+		<li data-note="c4" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="db4" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="d4" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="eb4" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="e4" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="f4" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="gb4" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="g4" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="ab4" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="a4" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="bb4" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="b4" class="key white"><span class="toggleable-text"></span></li>
 
-		<li data-note="c5" class="key white"><span></span></li>
-		<li data-note="db5" class="key black"><span></span></li>
-		<li data-note="d5" class="key white"><span></span></li>
-		<li data-note="eb5" class="key black"><span></span></li>
-		<li data-note="e5" class="key white"><span></span></li>
-		<li data-note="f5" class="key white"><span></span></li>
-		<li data-note="gb5" class="key black"><span></span></li>
-		<li data-note="g5" class="key white"><span></span></li>
-		<li data-note="ab5" class="key black"><span></span></li>
-		<li data-note="a5" class="key white"><span></span></li>
-		<li data-note="bb5" class="key black"><span></span></li>
-		<li data-note="b5" class="key white"><span></span></li>
+		<li data-note="c5" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="db5" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="d5" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="eb5" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="e5" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="f5" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="gb5" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="g5" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="ab5" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="a5" class="key white"><span class="toggleable-text"></span></li>
+		<li data-note="bb5" class="key black"><span class="toggleable-text"></span></li>
+		<li data-note="b5" class="key white"><span class="toggleable-text"></span></li>
 
-		<li data-note="c6" class="key white"><span></span></li>
+		<li data-note="c6" class="key white"><span class="toggleable-text"></span></li>
 
 	</ul>
 
-	<span class='sustain' id="sustain">Sustain Pedal:<span class="sustain-spacing">Spacebar</span></span>
-	<button type='button' class='letter-toggle' id='letter-toggle'>Toggle Letters</button>
-	<section>
-		<span class="visualizer-options matched-vis" id="matched-vis">Matched</span>
-		<span class="visualizer-options matched-random-vis" id="matched-random-vis">Matched-Rand</span>
-		<span class="visualizer-options random-vis" id="random-vis">Random</span>
+	<span class='sustain' id="sustain"><span class="toggleable-text">Sustain Pedal:<span class="sustain-spacing">Spacebar</span></span></span>
+	<span class='letter-toggle' id='letter-toggle'>Toggle Letters</span>
+	<span class="visualizer-options matched-vis" id="matched-vis">Matched</span>
+	<span class="visualizer-options matched-random-vis" id="matched-random-vis">Random</span>
+	<!-- <span class="visualizer-options large-random-vis" id="large-random-vis">Large Random</span> -->
+	<!-- <span class="visualizer-options random-vis" id="random-vis">Random</span> -->
 	</section>
 	<section>
 		<span class="video-options" id="legion">Legion</span>

@@ -17,44 +17,45 @@ let keys = Array.from(document.querySelectorAll('.key'))
 let keysText = Array.from(document.querySelectorAll('.key span'))
 const whiteKeys = Array.from(document.querySelectorAll('.key.white'))
 const blackKeys = Array.from(document.querySelectorAll('.key.black'))
+const toggleableText = document.querySelectorAll('.toggleable-text')
 
 //Visualizer Query Selectors: qs's and helper variables on visualizers
 const visualizers = Array.from(document.querySelectorAll('.visualizer'))
 const visualizerOptions = Array.from(document.querySelectorAll('.visualizer-options'))
 const visMatched = document.querySelector('#matched-vis')
 const visMatchedRand = document.querySelector('#matched-random-vis')
-const visRandom = document.querySelector('#random-vis')
+// const visLargeRandom = document.querySelector('#large-random-vis')
+// const visRandom = document.querySelector('#random-vis')
 
 //Visualizer Video Query Selectors and video links
 const visVideo = document.querySelector('#visualizer-video')
-const visVideoSrc = document.querySelector('#primary-video-src')
-const visVideoSrcBackup = document.querySelector('#backup-video-src')
+// const visVideoSrcExternal = document.querySelector('#external-video-src')
+const visVideoSrcLocal = document.querySelector('#local-video-src')
 const visVideoOptions = document.querySelectorAll('.video-options')
 
 const visVideoLegion = document.querySelector('#legion')
-const visVideoLegionSrc = `https://www.googleapis.com/drive/v3/files/1_XKunAVDspt7sKCqgU4zUAA1i8e7O01b?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
-const visVideoLegionSrcBackup = `video/legion-animation-fight.mp4`
+const visVideoLegionSrcLocal = `video/legion-animation-fight.mp4`
+// const visVideoLegionSrcExternal = `https://www.googleapis.com/drive/v3/files/1_XKunAVDspt7sKCqgU4zUAA1i8e7O01b?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
 
 const visVideoYoI = document.querySelector('#yoi')
-// const visVideoYoISrc = `https://www.googleapis.com/drive/v3/files/107a2WKTEiHHxgYFe4NS4svb1S8A8i9va?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
-const visVideoYoISrcBackup = `video/yoi-eros.mp4`
-const visVideoYoISrc = `video/yoi-eros.mp4`
+const visVideoYoISrcLocal = `video/yoi-eros.mp4`
+// const visVideoYoISrcExternal = `https://www.googleapis.com/drive/v3/files/107a2WKTEiHHxgYFe4NS4svb1S8A8i9va?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
 
 const visVideoHouseki = document.querySelector('#houseki')
-const visVideoHousekiSrc = `https://www.googleapis.com/drive/v3/files/1hiTkqryXM1wxsrSJ6YtARQ5bbkW-j80l?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
-const visVideoHousekiSrcBackup = `video/houseki-no-kuni.mp4`
+const visVideoHousekiSrcLocal = `video/houseki-no-kuni.mp4`
+// const visVideoHousekiSrcExternal = `https://www.googleapis.com/drive/v3/files/1hiTkqryXM1wxsrSJ6YtARQ5bbkW-j80l?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
 
 const visVideoArcane = document.querySelector('#arcane')
-const visVideoArcaneSrc = `https://www.googleapis.com/drive/v3/files/1wt1L_tlv-bkR6NGsnvYzA7JPECKezfRr?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
-const visVideoArcaneSrcBackup = `video/arcane-jayce-ryze.mp4`
+const visVideoArcaneSrcLocal = `video/arcane-jayce-ryze.mp4`
+// const visVideoArcaneSrcExternal = `https://www.googleapis.com/drive/v3/files/1wt1L_tlv-bkR6NGsnvYzA7JPECKezfRr?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
 
 const visVideoSpace = document.querySelector('#space')
-const visVideoSpaceSrc = `https://www.googleapis.com/drive/v3/files/1Fyn4IQ6P7E_rmkdZJJjSRu7qTPfaGEAw?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
-const visVideoSpaceSrcBackup = `video/space.mp4`
+const visVideoSpaceSrcLocal = `video/space.mp4`
+// const visVideoSpaceSrcExternal = `https://www.googleapis.com/drive/v3/files/1Fyn4IQ6P7E_rmkdZJJjSRu7qTPfaGEAw?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
 
 const visVideoLeon = document.querySelector('#leon')
-const visVideoLeonSrc = `https://www.googleapis.com/drive/v3/files/1wwGfRSySuNxnNSV6ff9VaEvFCt0ElJBm?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
-const visVideoLeonSrcBackup = `video/leon-vibing.mp4`
+const visVideoLeonSrcLocal = `video/leon-vibing.mp4`
+// const visVideoLeonSrcExternal = `https://www.googleapis.com/drive/v3/files/1wwGfRSySuNxnNSV6ff9VaEvFCt0ElJBm?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
 
 
 //sets the default visualizer option
@@ -72,7 +73,8 @@ letterToggle.addEventListener('click', toggleKeyLetters)
 //Visualizer Options
 visMatched.addEventListener('click', visualizerSelect)
 visMatchedRand.addEventListener('click', visualizerSelect)
-visRandom.addEventListener('click', visualizerSelect)
+// visLargeRandom.addEventListener('click', visualizerSelect)
+// visRandom.addEventListener('click', visualizerSelect)
 
 visVideoLegion.addEventListener('click', visVideoSelect)
 visVideoYoI.addEventListener('click', visVideoSelect)
@@ -246,6 +248,8 @@ function releaseSustain() {
 
 
 //Visualizer Functions: logic for how the visualizer works 
+let largeVisPanelSize = 2  //the size of large vis panels
+
 //create and populate a dictionary that matches active vispanels to the keys that activated them
 let visPanelKeys = {}
 // visualizers.forEach((e, index) => {
@@ -256,24 +260,48 @@ let visPanelKeys = {}
 let visActives = [];    //array to hold active visualizers
 function visualizerActivate(index) {
     // call to activate a random number of visualizer panels
-    let randomVisualizerPanels = function () {
-        // ensure that at least one visPanel is activated
-        // get a random panel's index and activate it, then add it to the array of active panels and associate 
-        // the panel with the activating piano key's index
-        let randomPanel = getRandomInt(MAX_KEYS - 1)
-        visualizers[randomPanel].classList.add('active')
-        visActives.push(randomPanel)
-        visPanelKeys[randomPanel] = index
+    let randomVisualizerPanels = function (panelSize = 1) {
+        // // ensure that at least one visPanel is activated
+        // // get a random panel's index and activate it, then add it to the array of active panels and associate the panel with the activating piano key's index
+        // let randomPanel = getRandomInt(MAX_KEYS)
+        // visualizers[randomPanel].classList.add('active')
+        // visActives.push(randomPanel)
+        // visPanelKeys[randomPanel] = index
+
+        // // panelSize can add additional panels next to the selected random panel to create a larger panel
+        // for (let i = 1; i < panelSize; i++) {
+        //     if ((randomPanel + panelSize) < visualizers.length) {
+        //         visualizers[randomPanel + i].classList.add('active')
+        //     } else {
+        //         visualizers[randomPanel - i].classList.add('active')
+        //     }
+        // }
 
         // same as when the first visPanel was activated, but does it a random number of extra times
-        let otherPanels = getRandomInt(10)   //choose a random number of visPanels to activate
-        for (let i = 1; i < otherPanels; i++) {
-            randomPanel = getRandomInt(MAX_KEYS - 1)
-            // prevent panels from being activated if already active
+        let totalPanels = getRandomInt(10, 1)   //choose a random number of visPanels to activate
+        let randomPanel
+        console.log(totalPanels)
+        for (let i = 0; i < totalPanels; i++) {
+            randomPanel = getRandomInt(MAX_KEYS)
+            console.log(`random int: ${randomPanel}`)
             if (visActives.indexOf(randomPanel) > -1) continue
-            visualizers[randomPanel].classList.add('active')
-            visActives.push(randomPanel)
-            visPanelKeys[randomPanel] = index
+
+            for (let j = 0; j < panelSize; j++) {   //the large panel option
+                // prevent panels from being activated if already active
+                visualizers[randomPanel+j].classList.add('active')
+                visActives.push(randomPanel+j)
+                visPanelKeys[randomPanel+j] = index
+            }
+
+            // //large panel option. Not sure if it needs to be separated or not
+            // for (let j = 1; j < panelSize; j++) {
+            //     if ((randomPanel + panelSize) < visualizers.length) {
+            //         visualizers[randomPanel + j].classList.add('active')
+            //     } else {
+            //         visualizers[randomPanel - j].classList.add('active')
+
+            //     }
+            // }
         }
     }
 
@@ -281,17 +309,16 @@ function visualizerActivate(index) {
         visualizers[index].classList.add('active')
         visActives.push(index)
         visPanelKeys[index] = index //associates the activated visPanel to the activating piano key's index
-    }
-    else if (visOptions == 'matched-random-vis') {
+    } else if (visOptions == 'matched-random-vis') {
         //does the same as the matched option 
         visualizers[index].classList.add('active')
         visPanelKeys[index] = index
         visActives.push(index)
         visPanelKeys[index] = index
-
         randomVisualizerPanels()    //activate a random number of extra random visPanels
-    }
-    else if (visOptions == 'random-vis') {
+    } else if (visOptions == 'large-random-vis') {
+        randomVisualizerPanels(largeVisPanelSize)   //activate a random number of vis panels that are each larger than normal
+    } else if (visOptions == 'random-vis') {
         randomVisualizerPanels()    //activate a random number of visPanels
     } else {
         console.log(`visOptions didn't activate. Currently set to ${visOptions}`)
@@ -317,25 +344,23 @@ function visualizerDeactivate(keyIndex) {
     // deactivate visPanels associated with released piano key
     panelsToDeactivate.forEach(value => {
         visualizers[value].classList.remove('active')
+        visActives.splice(value, 1)
         // console.log(`panelsToDeactivate[index]: ${panelsToDeactivate[index]}`)
         // visualizers[panelsToDeactivate[index]].classList.remove('active')
     })
-
-    // //Wipes out all visualizer panel actives
-    // visActives.forEach(index =>
-    //     visualizers[index].classList.remove('active'))
-    // visActives.length = 0
 }
 
 //Helpers: Helper functions
 //Create a random int
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max + 1)
+function getRandomInt(max, min = 0,) {
+    return Math.floor(Math.random() * max + min)
 }
 
 //UI: how the ui works
 function toggleKeyLetters() {
-    keysText.forEach((key) => key.classList.toggle('hide'))
+    // keysText.forEach((key) => key.classList.toggle('hide'))
+    toggleableText.forEach(pianoKey => pianoKey.classList.toggle('hide'))
+
 }
 
 function labelKeys() {
@@ -349,52 +374,44 @@ function visualizerSelect(visualizerType) {
     visOptions = visualizerType.target.id
     visualizerOptions.forEach(v => v.classList.remove('active'))
     visualizerType.target.classList.add('active')
-
 }
 
 //Video: select the video that plays in the background of the piano
 function visVideoSelect(video) {
-    visVidId = video.target.id
+    let visVidId = video.target.id
     console.log(visVidId)
     visVideoOptions.forEach(e => e.classList.remove('active'))
     video.target.classList.add('active')
 
-    if(visVidId == 'legion') {
-        visVideoSrc.src = visVideoLegionSrc
-        visVideoSrcBackup.src = visVideoLegionSrcBackup
+    if (visVidId == 'legion') {
+        // visVideoSrcExternal.src = visVideoLegionSrc
+        visVideoSrcLocal.src = visVideoLegionSrcLocal
         visVideo.load()
-        visVideo.play()
-    } else if(visVidId == 'yoi'){
-        visVideoSrc.src = visVideoYoISrc
-        visVideoSrcBackup.src = visVideoYoISrcBackup
+        // visVideo.play()
+    } else if (visVidId == 'yoi') {
+        // visVideoSrcExternal.src = visVideoYoISrc
+        visVideoSrcLocal.src = visVideoYoISrcLocal
         visVideo.load()
-        visVideo.play()
-        
+        // visVideo.play()
     } else if (visVidId == 'houseki') {
-        visVideoSrc.src = visVideoHousekiSrc
-        visVideoSrcBackup.src = visVideoHousekiSrcBackup
+        // visVideoSrcExternal.src = visVideoHousekiSrc
+        visVideoSrcLocal.src = visVideoHousekiSrcLocal
         visVideo.load()
-        visVideo.play()
-        
+        // visVideo.play()
     } else if (visVidId == 'arcane') {
-        visVideoSrc.src = visVideoArcaneSrc
-        visVideoSrcBackup.src = visVideoArcaneSrcBackup
+        // visVideoSrcExternal.src = visVideoArcaneSrc
+        visVideoSrcLocal.src = visVideoArcaneSrcLocal
         visVideo.load()
-        visVideo.play()
-        
+        // visVideo.play()
     } else if (visVidId == 'space') {
-        visVideoSrc.src = visVideoSpaceSrc
-        visVideoSrcBackup.src = visVideoSpaceSrcBackup
+        // visVideoSrcExternal.src = visVideoSpaceSrc
+        visVideoSrcLocal.src = visVideoSpaceSrcLocal
         visVideo.load()
-        visVideo.play()
-        
-        
+        // visVideo.play()
     } else if (visVidId == 'leon') {
-        visVideoSrc.src = visVideoLeonSrc
-        visVideoSrcBackup.src = visVideoLeonSrcBackup
+        // visVideoSrcExternal.src = visVideoLeonSrc
+        visVideoSrcLocal.src = visVideoLeonSrcLocal
         visVideo.load()
-        visVideo.play()
-        
-        
+        // visVideo.play()
     }
 }
