@@ -3,8 +3,8 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta name="description" content="Your description goes here">
-	<meta name="keywords" content="one, two, three">
+	<meta name="description" content="An experiment in combining video backgrounds with a virtual piano">
+	<meta name="keywords" content="virtual piano, visualization">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>Virtual Piano and Visualizer</title>
@@ -16,47 +16,49 @@
 
 <body>
 	<ul class="visualizer-console">
-		<video playsinline autoplay muted loop class="visualizer-video"><source src="/video/stark-death.mp4"></video>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
+		<video playsinline autoplay muted loop class="visualizer-video" id="visualizer-video">
+			<source src="/video/david-farouk-blue-eyes-fight.mp4">
+		</video>
+		<li class="visualizer" id="v1"></li>
+		<li class="visualizer" id="v2"></li>
+		<li class="visualizer" id="v3"></li>
+		<li class="visualizer" id="v4"></li>
+		<li class="visualizer" id="v5"></li>
+		<li class="visualizer" id="v6"></li>
+		<li class="visualizer" id="v7"></li>
+		<li class="visualizer" id="v8"></li>
+		<li class="visualizer" id="v9"></li>
+		<li class="visualizer" id="v10"></li>
+		<li class="visualizer" id="v11"></li>
+		<li class="visualizer" id="v12"></li>
 
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
+		<li class="visualizer" id="v13"></li>
+		<li class="visualizer" id="v14"></li>
+		<li class="visualizer" id="v15"></li>
+		<li class="visualizer" id="v16"></li>
+		<li class="visualizer" id="v17"></li>
+		<li class="visualizer" id="v18"></li>
+		<li class="visualizer" id="v19"></li>
+		<li class="visualizer" id="v20"></li>
+		<li class="visualizer" id="v21"></li>
+		<li class="visualizer" id="v22"></li>
+		<li class="visualizer" id="v23"></li>
+		<li class="visualizer" id="v24"></li>
 
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		<li class="visualizer"></li>
-		
-		<li class="visualizer"></li>
+		<li class="visualizer" id="v25"></li>
+		<li class="visualizer" id="v26"></li>
+		<li class="visualizer" id="v27"></li>
+		<li class="visualizer" id="v28"></li>
+		<li class="visualizer" id="v29"></li>
+		<li class="visualizer" id="v30"></li>
+		<li class="visualizer" id="v31"></li>
+		<li class="visualizer" id="v32"></li>
+		<li class="visualizer" id="v33"></li>
+		<li class="visualizer" id="v34"></li>
+		<li class="visualizer" id="v35"></li>
+		<li class="visualizer" id="v36"></li>
+
+		<li class="visualizer" id="v37"></li>
 	</ul>
 
 	<ul class="keyboard">
@@ -98,17 +100,23 @@
 		<li data-note="a5" class="key white"><span></span></li>
 		<li data-note="bb5" class="key black"><span></span></li>
 		<li data-note="b5" class="key white"><span></span></li>
-		
+
 		<li data-note="c6" class="key white"><span></span></li>
 
 	</ul>
 
-	<button type="button" class='sustain' id="sustain">Sustain Pedal</button>
+	<span class='sustain' id="sustain">Sustain Pedal:<span class="sustain-spacing">Spacebar</span></span>
 	<button type='button' class='letter-toggle' id='letter-toggle'>Toggle Letters</button>
-	<span class="visualizer-options" id="matched-vis">Matched</span>
-	<span class="visualizer-options" id="matched-random-vis">Matched-Rand</span>
-	<span class="visualizer-options" id="random-vis">Random</span>
-
+	<section>
+		<span class="visualizer-options matched-vis" id="matched-vis">Matched</span>
+		<span class="visualizer-options matched-random-vis" id="matched-random-vis">Matched-Rand</span>
+		<span class="visualizer-options random-vis" id="random-vis">Random</span>
+	</section>
+	<section>
+		<span class="video-options" id="legion">Legion</span>
+		<span class="video-options" id="avengers">Avengers</span>
+		<span class="video-options" id="yoi">Yuri on Ice!!</span>
+	</section>
 
 	<audio id="c3" src="sounds/default/C3.mp3"></audio>
 	<audio id="db3" src="sounds/default/Db3.mp3"></audio>
@@ -135,7 +143,7 @@
 	<audio id="a4" src="sounds/default/A4.mp3"></audio>
 	<audio id="bb4" src="sounds/default/Bb4.mp3"></audio>
 	<audio id="b4" src="sounds/default/B4.mp3"></audio>
-	
+
 	<audio id="c5" src="sounds/default/C5.mp3"></audio>
 	<audio id="db5" src="sounds/default/Db5.mp3"></audio>
 	<audio id="d5" src="sounds/default/D5.mp3"></audio>
