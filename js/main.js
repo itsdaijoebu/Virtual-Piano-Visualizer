@@ -280,10 +280,8 @@ function visualizerActivate(index) {
         // same as when the first visPanel was activated, but does it a random number of extra times
         let totalPanels = getRandomInt(10, 1)   //choose a random number of visPanels to activate
         let randomPanel
-        console.log(totalPanels)
         for (let i = 0; i < totalPanels; i++) {
             randomPanel = getRandomInt(MAX_KEYS)
-            console.log(`random int: ${randomPanel}`)
             if (visActives.indexOf(randomPanel) > -1) continue
 
             for (let j = 0; j < panelSize; j++) {   //the large panel option
@@ -379,7 +377,6 @@ function visualizerSelect(visualizerType) {
 //Video: select the video that plays in the background of the piano
 function visVideoSelect(video) {
     let visVidId = video.target.id
-    console.log(visVidId)
     visVideoOptions.forEach(e => e.classList.remove('active'))
     video.target.classList.add('active')
 
