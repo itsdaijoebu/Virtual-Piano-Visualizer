@@ -57,6 +57,12 @@ const visVideoLeon = document.querySelector('#leon')
 const visVideoLeonSrcLocal = `video/leon-vibing.mp4`
 // const visVideoLeonSrcExternal = `https://www.googleapis.com/drive/v3/files/1wwGfRSySuNxnNSV6ff9VaEvFCt0ElJBm?key=AIzaSyCNDWHR4c65LsBdctbQVLeYtEtbeUfdZZk&alt=media`
 
+//ensures document fully loads before allowing it to be played
+function doOnDocumentLoad() {
+    loaderInit()
+    carouseslInit()
+}
+
 
 //sets the default visualizer option
 let visOptions = 'matched-random-vis'
@@ -192,12 +198,12 @@ function playNote(key, index) {
         key.classList.remove('active')
         visualizerDeactivate(index)
     })
-
 }
 
 function stopNote(key, index) {
-    let noteAudio = document.getElementById(key.dataset.note)
+    let noteAudio = document.getElementById(key.dataset.note)   //the note to be played
 
+    // quickly fades out the note's audio since it sounds bad if the note cuts out the moment you release the key
     let noteTimer = setInterval(
         function () {
             //clearInterval if key was pressed before note stopped fading, in order to prevent it from stopping the newly-pressed note from also fading
@@ -208,7 +214,7 @@ function stopNote(key, index) {
             //prevents noteAudio.volume from going below zero
             if (noteAudio.volume > minVol && noteAudio.volume < fadeSpeed) noteAudio.volume = fadeSpeed
 
-            //when called, causes the note to rapidly fade and stop all visualizations
+            //when called, causes the note to rapidly fade and deactivate all visualization panels
             if (noteAudio.volume > minVol) {
                 noteAudio.volume -= fadeSpeed
             } else {
@@ -226,9 +232,9 @@ function stopNote(key, index) {
 function pressSustain() {
     sustain = true
     sustainButton.classList.add('active')
-
 }
 
+// populates an array that keeps track of notes being held while sustain pedal is active
 function sustainActive(keyIndex) {
     sustainKeys.push(keys[keyIndex])
     sustainKeyIndexes.push(keyIndex)
@@ -244,8 +250,6 @@ function releaseSustain() {
     sustainKeyIndexes.length = 0;
     sustainButton.classList.remove('active')
 }
-
-
 
 //Visualizer Functions: logic for how the visualizer works 
 let largeVisPanelSize = 2  //the size of large vis panels
