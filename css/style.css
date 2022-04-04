@@ -112,6 +112,12 @@ li.black {
 .black.active {
      background-color: rgb(92, 90, 90);
 }
+/* .white.fade, .black.fade {
+     transition: all 1s ease-in;
+} */
+/*.fade {
+     transition: all 1s ease-in;
+} */
 
 /******************************************
 /* UI ELEMENTS

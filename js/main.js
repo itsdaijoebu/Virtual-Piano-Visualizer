@@ -8,9 +8,23 @@
 //- ?allow for having video show by default and playing keys adds panels to obscure it?
 
 //The keyboard keys
-const KEYBOARD_KEYS = ['q', '2', 'w', '3', 'e', 'r', '5', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '[', '=', ']', 'a', 'z', 's', 'x', 'c', 'f', 'v', 'g', 'b', 'n', 'j', 'm', 'k', ',', 'l', '.', '/']
+// const KEYBOARD_KEYS = ['q', '2', 'w', '3', 'e', 'r', '5', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '[', '=', ']', 'a', 'z', 's', 'x', 'c', 'f', 'v', 'g', 'b', 'n', 'j', 'm', 'k', ',', 'l', '.', '/']
+//keys are lined up in a row
+const KEYBOARD_KEYS_CONSECUTIVE = ['z', 's', 'x', 'd', 'c', 'v', 'g', 'b', 'h', 'n', 'j', 'm', ',', 'l', '.', ':', '/', 'q', '2', 'w', '3', 'e', '4', 'r', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '-', '[', ']' ]
+//splits the keyboard down the middle so left half of computer keyboard controls left half of piano keys and right half of CKeyboard controls right half of PKeyboard
+const KEYBOARD_KEYS_SPLIT = ['z', 's', 'x', 'd', 'c', 'v', 'g', 'b', '1', 'q', '2', 'w', 'e', '4', 'r', '5', 't', 'y', 'h', 'n', 'j', 'm', 'k', ',', '.', ';', '/', '7', 'u', 'i', '9', 'o', '0', 'p', '-', '[', ']' ]
 const SUSTAIN_PEDAL = ' '
-const MAX_KEYS = KEYBOARD_KEYS.length   //total number of keys linked to keyboard keys
+const MAX_KEYS = KEYBOARD_KEYS_SPLIT.length   //total number of keys linked to keyboard keys
+
+//change keyboard control scheme
+let keyToggle = document.querySelector('#key-toggle')
+let useSplit = true;
+let keyboardKeys = KEYBOARD_KEYS_SPLIT;
+keyToggle.addEventListener('click', () => {
+    useSplit ? keyboardKeys = KEYBOARD_KEYS_SPLIT : keyboardKeys = KEYBOARD_KEYS_CONSECUTIVE;
+    useSplit = !useSplit;
+    labelKeys();
+})
 
 //Key Query Selectors: qs's on keys
 let keys = Array.from(document.querySelectorAll('.key'))
@@ -62,7 +76,6 @@ function doOnDocumentLoad() {
     loaderInit()
     carouseslInit()
 }
-
 
 //sets the default visualizer option
 let visOptions = 'matched-random-vis'
@@ -122,7 +135,7 @@ function pressKey(e) {
     }
 
     // if (e.repeat) return
-    let keyIndex = KEYBOARD_KEYS.indexOf(keyboardKey)    //finds the index of the keyboardKey 
+    let keyIndex = keyboardKeys.indexOf(keyboardKey)    //finds the index of the keyboardKey 
     // const whiteKeyIndex = WHITE_KEYS.indexOf(key)
     // const blackKeyIndex = BLACK_KEYS.indexOf(key)
 
@@ -157,7 +170,7 @@ function releaseKey(e) {
         // sustainKeyIndexes.length = 0;
     }
 
-    let keyIndex = KEYBOARD_KEYS.indexOf(keyboardKey)
+    let keyIndex = keyboardKeys.indexOf(keyboardKey)
 
     if (keyIndex > -1) {
 
@@ -362,12 +375,11 @@ function getRandomInt(max, min = 0,) {
 function toggleKeyLetters() {
     // keysText.forEach((key) => key.classList.toggle('hide'))
     toggleableText.forEach(pianoKey => pianoKey.classList.toggle('hide'))
-
 }
 
 function labelKeys() {
     keysText.forEach((key, index) => {
-        key.textContent = KEYBOARD_KEYS[index]
+        key.textContent = keyboardKeys[index]
     })
 }
 
