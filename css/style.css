@@ -6,6 +6,8 @@
 
      --white: rgb(255, 251, 251);
      --white-active: #CCC;
+
+     cursor: default;
 }
 
 /* Clear fix hack */
