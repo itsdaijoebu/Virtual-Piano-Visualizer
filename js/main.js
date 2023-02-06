@@ -10,7 +10,7 @@
 //The keyboard keys
 // const KEYBOARD_KEYS = ['q', '2', 'w', '3', 'e', 'r', '5', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '[', '=', ']', 'a', 'z', 's', 'x', 'c', 'f', 'v', 'g', 'b', 'n', 'j', 'm', 'k', ',', 'l', '.', '/']
 //keys are lined up in a row
-const KEYBOARD_KEYS_CONSECUTIVE = ['z', 's', 'x', 'd', 'c', 'v', 'g', 'b', 'h', 'n', 'j', 'm', ',', 'l', '.', ':', '/', 'q', '2', 'w', '3', 'e', '4', 'r', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '-', '[', ']' ]
+const KEYBOARD_KEYS_CONSECUTIVE = ['z', 's', 'x', 'd', 'c', 'v', 'g', 'b', 'h', 'n', 'j', 'm', ',', 'l', '.', ';', '/', 'q', '2', 'w', '3', 'e', '4', 'r', 't', '6', 'y', '7', 'u', 'i', '9', 'o', '0', 'p', '-', '[', ']' ]
 //splits the keyboard down the middle so left half of computer keyboard controls left half of piano keys and right half of CKeyboard controls right half of PKeyboard
 const KEYBOARD_KEYS_SPLIT = ['z', 's', 'x', 'd', 'c', 'v', 'g', 'b', '1', 'q', '2', 'w', 'e', '4', 'r', '5', 't', 'y', 'h', 'n', 'j', 'm', 'k', ',', '.', ';', '/', '7', 'u', 'i', '9', 'o', '0', 'p', '-', '[', ']' ]
 const SUSTAIN_PEDAL = ' '
@@ -19,7 +19,8 @@ const MAX_KEYS = KEYBOARD_KEYS_SPLIT.length   //total number of keys linked to k
 //change keyboard control scheme
 let keyToggle = document.querySelector('#key-toggle')
 let useSplit = true;
-let keyboardKeys = KEYBOARD_KEYS_SPLIT;
+// let keyboardKeys = KEYBOARD_KEYS_SPLIT;
+let keyboardKeys = KEYBOARD_KEYS_CONSECUTIVE;
 keyToggle.addEventListener('click', () => {
     useSplit ? keyboardKeys = KEYBOARD_KEYS_SPLIT : keyboardKeys = KEYBOARD_KEYS_CONSECUTIVE;
     useSplit = !useSplit;
@@ -222,7 +223,7 @@ function stopNote(key, index) {
             //clearInterval if key was pressed before note stopped fading, in order to prevent it from stopping the newly-pressed note from also fading
             if (pressedKeys.indexOf(key) > -1) clearInterval(noteTimer)
 
-            let minVol = 0.001
+            let minVol = 0
             let fadeSpeed = 0.05
             //prevents noteAudio.volume from going below zero
             if (noteAudio.volume > minVol && noteAudio.volume < fadeSpeed) noteAudio.volume = fadeSpeed
