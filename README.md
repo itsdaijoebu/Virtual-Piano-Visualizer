@@ -1,6 +1,8 @@
 # VirtualPianoVisualizer
 https://virtual-piano-visualizer.itsdaijoebu.repl.co/
 
+https://user-images.githubusercontent.com/93284023/219933032-ca968cd5-c42c-49bd-b95a-96abd4bf8453.mp4
+
 I wanted to have a way to play piano while traveling. None of the existing solutions really did it for me, so I tried to roll my own. Also includes choosable videos that are partially revealed as you play.
 
 **Current features include:**  
@@ -22,5 +24,5 @@ If I were to take this further, I'd want to add the ability to upload your own v
 I'd also add multiple voices for the keyboard to give it more variety.
 
 
-https://user-images.githubusercontent.com/93284023/219933032-ca968cd5-c42c-49bd-b95a-96abd4bf8453.mp4
+
 
